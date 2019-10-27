@@ -12,10 +12,14 @@ import com.sandra.falldetectorpush.repository.NotificationRepository;
 
 import io.realm.Realm;
 
+
+//Classe App visivel para todas as classes da aplicação
 public class App extends Application {
 
     public static App instance;
+    //Variavel para acessar o shared preferences que irá armazenar o nome de usuário
     private SharedPreferences sharedPreferences;
+    //Variavel para a acessar o repositorio do Realm o qual armazena as notificacoes
     private NotificationRepository notificationRepository;
 
 

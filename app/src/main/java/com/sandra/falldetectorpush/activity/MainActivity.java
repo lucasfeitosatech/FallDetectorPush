@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements MqttCallbackExten
         notificationList.addItemDecoration(new DividerItemDecoration(this, LinearLayout.VERTICAL));
     }
 
+    //Metodo que configura um novo adpter com os dados das notificacoes
     public void setupAdpter(){
 
         NotificationAdpter adpter = new NotificationAdpter(notifications);
@@ -82,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements MqttCallbackExten
 
     }
 
+    //Método que recupera as notificacoes do banco e inicia o adpter
     public void getNotifications(){
 
         Notification[] notifications = App.getInstance().getNotificationRepository().getAllNotifications();
@@ -90,9 +92,11 @@ public class MainActivity extends AppCompatActivity implements MqttCallbackExten
 
     }
 
+    //Método responsavel por tocar um som de alerta
     public void playSound(){
 
         mp.start();
+        //Após iniciar o som cria uma nova thread para ser executada após 10 segundos
         Handler handler = new Handler();
         Runnable run = new Runnable() {
             @Override
@@ -112,10 +116,11 @@ public class MainActivity extends AppCompatActivity implements MqttCallbackExten
     @Override
     public void connectComplete(boolean reconnect, String serverURI) {
         Log.w("teste", "Conexao Completada");
-        //publishMessage("oi com.sandra.falldetectorpush.App denovo","/teste");
+        //Recupera o usuário salvo no shared preferences
         String username = PreferenceManager.getDefaultSharedPreferences(this).getString("username", null);
         //Sandra Thais Sandra-Thais
         String topic = "/" + username.replace(" ","-");
+        //Subscribe no topico do MQTT
         mqttManagerAndroid.subscribeToTopic(topic);
     }
 
@@ -128,17 +133,21 @@ public class MainActivity extends AppCompatActivity implements MqttCallbackExten
     public void messageArrived(String topic, MqttMessage message) throws Exception {
         Log.d("Message Arrived", "messageArrived: ");
 
+        //Obtem do sistema a data de hoje
         Date date = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         String today = dateFormat.format(date);
 
+        //Cria uma nova notificacao e salva no banco de dados
         Notification n = new Notification(message.toString(),today);
         App.getInstance().getNotificationRepository().saveNotification(n);
         notifications.add(n);
+        //Atualiza a lista
         setupAdpter();
 
         playSound();
 
+        //Cria a notificacao
         String username = PreferenceManager.getDefaultSharedPreferences(this).getString("username", null);
         NotificationHelper notificationHelper = new NotificationHelper(this);
         notificationHelper.createNotification("Atenção!!!",username + " provavelmente sofreu uma queda");

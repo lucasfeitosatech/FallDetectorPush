@@ -120,6 +120,7 @@ public class MqttManagerAndroid {
         connect();
     }
 
+    //Método para conectar no cliente MQTT utilizando os parametros definidos inicialmente.
     private void connect()
     {
         MqttConnectOptions myConnectOption = new MqttConnectOptions();

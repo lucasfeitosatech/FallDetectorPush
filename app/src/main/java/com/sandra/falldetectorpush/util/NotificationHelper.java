@@ -13,6 +13,9 @@ import android.support.v4.app.NotificationCompat;
 import com.sandra.falldetectorpush.activity.MainActivity;
 import com.sandra.falldetectorpush.R;
 
+
+//Classe utilizado para gerenciar as notificações
+
 public class NotificationHelper {
 
     private Context mContext;
@@ -47,6 +50,7 @@ public class NotificationHelper {
 
         mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
 
+        //Verifica se a versão do Android é a 8 ou superior e utiliza o notification channel
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)
         {
             int importance = NotificationManager.IMPORTANCE_HIGH;
