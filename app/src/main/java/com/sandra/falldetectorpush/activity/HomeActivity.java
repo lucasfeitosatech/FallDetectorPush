@@ -1,4 +1,4 @@
-package com.sandra.falldetectorpush;
+package com.sandra.falldetectorpush.activity;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -6,6 +6,8 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import com.sandra.falldetectorpush.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,7 +25,7 @@ public class HomeActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         String username = PreferenceManager.getDefaultSharedPreferences(this).getString("username", null);
         if (username!= null){
-            Intent i = new Intent(this,MainActivity.class);
+            Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
         }
     }

@@ -1,4 +1,4 @@
-package com.sandra.falldetectorpush;
+package com.sandra.falldetectorpush.util;
 
 
 import android.app.NotificationChannel;
@@ -9,6 +9,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
+
+import com.sandra.falldetectorpush.activity.MainActivity;
+import com.sandra.falldetectorpush.R;
 
 public class NotificationHelper {
 

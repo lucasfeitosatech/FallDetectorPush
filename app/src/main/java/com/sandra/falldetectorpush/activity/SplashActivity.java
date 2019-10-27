@@ -1,9 +1,12 @@
-package com.sandra.falldetectorpush;
+package com.sandra.falldetectorpush.activity;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.sandra.falldetectorpush.R;
+import com.sandra.falldetectorpush.activity.MainActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -15,7 +18,7 @@ public class SplashActivity extends AppCompatActivity {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(getApplicationContext(),MainActivity.class);
+                Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(i);
                 finish();
             }

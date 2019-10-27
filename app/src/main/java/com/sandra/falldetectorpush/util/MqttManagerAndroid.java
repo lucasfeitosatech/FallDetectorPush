@@ -1,4 +1,4 @@
-package com.sandra.falldetectorpush;
+package com.sandra.falldetectorpush.util;
 
 import android.content.Context;
 import android.util.Log;
@@ -71,7 +71,7 @@ public class MqttManagerAndroid {
     private MqttAndroidClient mqttAndroidClient;
     private final String brokerIPAdress = "test.mosquitto.org";
     private final String brokerPort = "1883";
-    private final String clientID = "lucasmqttandroid4" + UUID.randomUUID();
+    private final String clientID = "android" + UUID.randomUUID();
     private final int connectionTimeOut = 30;
     private final int keepAliveInterval = 60;
     private final Boolean isCleanSession = true;
