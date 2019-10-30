@@ -10,8 +10,10 @@ import android.graphics.Color;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 
+import com.sandra.falldetectorpush.App;
 import com.sandra.falldetectorpush.activity.MainActivity;
 import com.sandra.falldetectorpush.R;
+import com.sandra.falldetectorpush.activity.StopSoundActivity;
 
 
 //Classe utilizado para gerenciar as notificações
@@ -33,7 +35,7 @@ public class NotificationHelper {
     public void createNotification(String title, String message)
     {
         /**Creates an explicit intent for an Activity in your app**/
-        Intent resultIntent = new Intent(mContext , MainActivity.class);
+        Intent resultIntent = new Intent(mContext , StopSoundActivity.class);
         resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         PendingIntent resultPendingIntent = PendingIntent.getActivity(mContext,

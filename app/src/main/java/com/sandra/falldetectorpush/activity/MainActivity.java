@@ -1,8 +1,10 @@
 package com.sandra.falldetectorpush.activity;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements MqttCallbackExten
     @BindView(R.id.rv_notification)
     RecyclerView notificationList;
     ArrayList<Notification> notifications = new ArrayList<>();
-    private MediaPlayer mp;
+
 
     private MqttManagerAndroid mqttManagerAndroid;
 
@@ -53,20 +55,12 @@ public class MainActivity extends AppCompatActivity implements MqttCallbackExten
         configRecyclerView();
         getNotifications();
 
-        mp = MediaPlayer.create(getApplicationContext(), R.raw.sirene);
 
         mqttManagerAndroid = new MqttManagerAndroid(this);
         mqttManagerAndroid.getMqttAndroidClient().setCallback(this);
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (mp.isPlaying()){
-            mp.stop();
-        }
-    }
 
     public void configRecyclerView(){
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -93,19 +87,7 @@ public class MainActivity extends AppCompatActivity implements MqttCallbackExten
     }
 
     //Método responsavel por tocar um som de alerta
-    public void playSound(){
 
-        mp.start();
-        //Após iniciar o som cria uma nova thread para ser executada após 10 segundos
-        Handler handler = new Handler();
-        Runnable run = new Runnable() {
-            @Override
-            public void run() {
-                mp.stop();
-            }
-        };
-        handler.postDelayed(run,10*1000);
-    }
 
     @OnClick(R.id.toolbar_left_button)
     public void onBackArrowClicked(){
@@ -145,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements MqttCallbackExten
         //Atualiza a lista
         setupAdpter();
 
-        playSound();
+        App.getInstance().playSound();
 
         //Cria a notificacao
         String username = PreferenceManager.getDefaultSharedPreferences(this).getString("username", null);
@@ -157,4 +139,5 @@ public class MainActivity extends AppCompatActivity implements MqttCallbackExten
     public void deliveryComplete(IMqttDeliveryToken token) {
 
     }
+
 }
